@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Post {
+  id        Int      @id @default(autoincrement())
+  username  String
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model todo {
+  id    BigInt @id @default(autoincrement())
+  title String
+}
+
+
+model MyTodo {
+  id        String      @id @default(uuid()) @db.Uuid
+  userId    String      @db.Uuid              // RLSで使うユーザーID
+  title     String
+  content   String?
+  status    TodoStatus  @default(TODO)        // ← enum 型
+  dueDate   DateTime?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+enum TodoStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
