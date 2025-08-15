@@ -1,5 +1,5 @@
-// app/login/SubmitButton.tsx
-//クライアントコンポーネント
+// src/app/login/SubmitButton.tsx
+// Client Component（動的UI最小限：Pure View）
 "use client";
 
 import { useFormStatus } from "react-dom";
