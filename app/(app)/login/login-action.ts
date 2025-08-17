@@ -17,8 +17,8 @@ export async function loginActionStateful(
   _prevState: LoginFormState,
   formData: FormData
 ): Promise<LoginFormState> {
-  const cookieStore = cookies();
 
+　 const cookieStore = await cookies();
   // 成功時の結果を先に受け取る（この中で redirect は呼ばない）
   let redirectTo: string;
   try {
