@@ -13,14 +13,16 @@ export async function POST(req: Request) {
   };
 
   try {
+    const cookieStore = await cookies(); // ★ Next.js 15: cookies() は Promise → await 必須
     const result = await authService.login(
       {
         email: body.email,
         password: body.password,
         redirectedFrom: body.redirectedFrom,
       },
-      { cookieStore: cookies() }
+      { cookieStore } // ★ 解決済みの cookieStore を渡す
     );
+
     return NextResponse.json({ ok: true, ...result });
   } catch (e: any) {
     const message =
